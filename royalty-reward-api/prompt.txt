@@ -1,0 +1,18 @@
+pnpm add @nestjs/config zod zod-validation-error
+pnpm add class-validator class-transformer
+pnpm add @nestjs/swagger swagger-ui-express
+pnpm add pino-http nestjs-pino
+
+# Auth stack
+pnpm add @nestjs/passport passport @nestjs/jwt passport-jwt argon2
+
+# Realtime (เผื่อแชท/แจ้งเตือนสถานะ)
+pnpm add @nestjs/websockets @nestjs/platform-socket.io socket.io
+
+# Prisma + PG
+pnpm add -D prisma
+pnpm add @prisma/client
+npx prisma init --datasource-provider postgresql
+
+# Redis (token blacklist / cache)
+pnpm add ioredis
