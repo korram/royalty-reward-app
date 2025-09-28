@@ -49,6 +49,12 @@ async function bootstrap() {
         { type: 'http', scheme: 'bearer', bearerFormat: 'JWT', description: 'Paste JWT here' },
         'JWT',
       )
+      // ใช้ cookie สำหรับ refresh token
+      .addCookieAuth('refresh_token', {
+        type: 'apiKey',
+        in: 'cookie',
+        description: 'Refresh token cookie',
+      })
       .build();
 
     const document = SwaggerModule.createDocument(app, config);

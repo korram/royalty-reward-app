@@ -1,5 +1,6 @@
-// import { PrismaClient, RoleName, ProductStatus } from '@prisma/client';
-import { PrismaClient, RoleName, ProductStatus } from '../generated/prisma';
+import { PrismaClient, RoleName, ProductStatus } from '@prisma/client';
+// import { PrismaClient, RoleName, ProductStatus } from '../generated/prisma';
+import * as argon2 from 'argon2';
 
 const prisma = new PrismaClient()
 
@@ -16,13 +17,15 @@ async function main() {
   })
 
   // --- Create a User ---
+  const passwordHash = await argon2.hash('admin1234');
   const user = await prisma.user.upsert({
     where: { email: 'admin@example.com' },
     update: {},
     create: {
       email: 'admin@example.com',
       name: 'Admin User',
-      passwordHash: 'hashed-password', // mock value
+      passwordHash,
+      status: 'VERIFIED',
     },
   })
 
