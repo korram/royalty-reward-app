@@ -1,0 +1,19 @@
+# สร้างโปรเจกต์
+npm i -g @nestjs/cli
+nest new shop-api && cd shop-api
+
+# เพิ่ม lib หลัก
+pnpm add @nestjs/config zod zod-validation-error
+pnpm add @nestjs/passport passport passport-jwt passport-google-oauth20 passport-facebook
+pnpm add @nestjs/jwt argon2
+pnpm add @nestjs/swagger swagger-ui-express
+pnpm add @nestjs/websockets @nestjs/platform-socket.io socket.io
+
+# prisma + pg
+pnpm add -D prisma
+pnpm add @prisma/client
+npx prisma init --datasource-provider postgresql
+
+# utils
+pnpm add class-validator class-transformer pino-http nestjs-pino
+pnpm add ioredis
