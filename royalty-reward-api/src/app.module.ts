@@ -18,6 +18,7 @@ import { SearchModule } from './modules/search/search.module';
 import { StorageModule } from './modules/storage/storage.module';
 import { AuditModule } from './modules/audit/audit.module';
 import { CommonModule } from './modules/common/common.module';
+import { AdminModule } from './modules/admin/admin.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { CommonModule } from './modules/common/common.module';
     SearchModule,
     StorageModule,
     AuditModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],

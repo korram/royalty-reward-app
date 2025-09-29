@@ -18,7 +18,15 @@ import {
 } from '@nestjs/swagger';
 import type { Response, Request } from 'express';
 import { AuthService } from './auth.service';
-import { ForgotDto, LoginDto, RefreshDto, RegisterDto, ResetDto, VerifyEmailDto } from './dto/auth.dto';
+import {
+  ForgotDto,
+  LoginDto,
+  RefreshDto,
+  RegisterDto,
+  ResetDto,
+  VerifyEmailDto,
+  OAuthLoginDto,
+} from './dto/auth.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CurrentUser } from './current-user.decorator';
 // import { JwtValidatePayload } from './strategies/jwt.strategy';
@@ -136,4 +144,29 @@ export class AuthController {
     }
     return undefined;
   }
+
+  // @Post('verify-facebook')
+  // @HttpCode(HttpStatus.OK)
+  // @ApiOperation({ summary: 'Verify Facebook access token' })
+  // async verifyFacebookAccessToken(
+  //   @Body() dto: OAuthLoginDto,
+  //   @Res({ passthrough: true }) res: Response,
+  // ) {
+  //   const result = await this.auth.verifyGoogleIdToken(dto);
+  //   this.setRefreshCookie(res, result);
+  //   return result;
+  // }
+
+  // @Post('verify-google')
+  // @HttpCode(HttpStatus.OK)
+  // @ApiOperation({ summary: 'Verify Google ID token' })
+  // async verifyGoogleIdToken(
+  //   @Body() dto: OAuthLoginDto,
+  //   @Res({ passthrough: true }) res: Response,
+  // ) {
+  //   const result = await this.auth.verifyFacebookAccessToken(dto);
+  //   this.setRefreshCookie(res, result.tokens.refreshToken);
+  //   return result;
+  // }
+  
 }

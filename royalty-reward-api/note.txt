@@ -17,3 +17,20 @@ npx prisma init --datasource-provider postgresql
 # utils
 pnpm add class-validator class-transformer pino-http nestjs-pino
 pnpm add ioredis
+
+
+
+Business Rules & Invariants
+- สินค้า ACTIVE เท่านั้นที่ซื้อได้
+- Stock decrement เมื่อ payment=PAID (configurable timing) + InventoryLog
+- Review ต้องมาจาก order COMPLETED (verify via OrderItem)
+- Coupon validation (time window, usageLimit, minSubtotal, per-user limit optional)
+- Order status transitions state machine (validate legal transitions)
+- Shop scoping บังคับใน service layer และ guard (shopId in JWT claim for staff ops)
+- Soft delete บาง entity (product) ด้วย status แทน hard delete
+
+Realtime & Chat
+- Namespace per shop, room per conversationId
+- Events: conversation:created, message:new, message:read, order:statusChanged
+- Persist messages in DB; backfill last N messages on join
+- Rate limit anti-spam

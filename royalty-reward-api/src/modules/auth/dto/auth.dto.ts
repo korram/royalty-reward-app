@@ -5,7 +5,12 @@ import {
   IsOptional,
   IsString,
   MinLength,
+  IsEnum
 } from 'class-validator';
+import { ApiPropertyOptional } from '@nestjs/swagger';
+
+export const OAUTH_PROVIDERS = ['google', 'facebook'] as const;
+export type OAuthProviderParam = (typeof OAUTH_PROVIDERS)[number];
 
 export class RegisterDto {
   @ApiProperty()
@@ -66,6 +71,29 @@ export class RefreshDto {
   @IsOptional()
   @IsString()
   refreshToken?: string;
+}
+
+
+export class OAuthLoginDto {
+  @ApiProperty({ enum: OAUTH_PROVIDERS })
+  @IsEnum(OAUTH_PROVIDERS)
+  provider!: OAuthProviderParam;
+
+  // google: ใช้ idToken, facebook: ใช้ accessToken
+  @ApiProperty({ description: 'Google idToken หรือ Facebook accessToken' })
+  @IsString()
+  token!: string;
+
+  @ApiPropertyOptional({ description: 'optional: ชื่อที่ได้จาก provider' })
+  @IsOptional()
+  @IsString()
+  name?: string;
+}
+
+export class OAuthUnlinkDto {
+  @ApiProperty({ enum: OAUTH_PROVIDERS })
+  @IsEnum(OAUTH_PROVIDERS)
+  provider!: OAuthProviderParam;
 }
 
 export type JwtUser = {
